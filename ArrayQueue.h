@@ -4,6 +4,9 @@
 #include "Queue.h"
 #include <utility>
 #include <stdexcept>
+#include <cstdlib>
+#include <cmath>
+
 
 #ifdef ARRAY_QUEUE_DEBUG
 #include <cstdio>
@@ -16,26 +19,28 @@ protected:
     T* m_data = nullptr;
     size_t m_write_index = 0;
     size_t m_size = 0;
+    const double m_growth_factor;
 
 public:
-    ArrayQueue() { }
+    ArrayQueue(double growth_factor = (1 + std::sqrt(5)) / 2.0)
+        : m_growth_factor(growth_factor) { }
     ~ArrayQueue() {
-        delete[] m_data;
+        std::free(static_cast<void*>(m_data));
     }
 
     virtual void enqueue(T&& value) override {
         if (!m_data) {
-            m_data = new T[1];
+            m_data = static_cast<T*>(std::malloc(sizeof(T)));
             m_write_index = 0;
             m_size = 1;
         }
         if (m_write_index >= m_size) {
             // we're at the end, resize
-            auto new_data = new T[m_size *= 2];
-            for (size_t i = 0; i < m_size / 2; ++i) {
-                new_data[i] = std::move(m_data[i]);
+            m_size = std::ceil(static_cast<double>(m_size) * m_growth_factor);
+            T* new_data = static_cast<T*>(std::realloc(static_cast<void*>(m_data), m_size * sizeof(T)));
+            if (!new_data) {
+                throw std::runtime_error("failed to realloc (OOM)");
             }
-            delete[] m_data;
             m_data = new_data;
         }
 #ifdef ARRAY_QUEUE_DEBUG
