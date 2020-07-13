@@ -10,7 +10,7 @@ A few C++ queue implementations. I'm writing these as a little exercise for myse
 ## ArrayQueue
 
 An array is used to store all the values of the queue. For this, an index keeps track of the index of the next free space.
-This means that it points past the end if the array is not large enough. In that case the size of the array is doubled on the
+This means that it points past the end if the array is not large enough. In that case the size of the array is increased by GROWTH_FACTOR (~1.61) on the
 next enqueue call.
 
 ```
@@ -41,3 +41,7 @@ Just uses a linked list, slowest variant of all the implementations. Creates a n
 ## RingBufferQueue
 
 Non-resizable queue based on a ring buffer, really fast but really memory hungry as the size needs to be known and allocated at the start.
+
+## DoublyLinkedListQueue
+
+Uses a circular doubly linked list, faster dequeue than the LinkedListQueue.

@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <cmath>
 
+static const double GROWTH_FACTOR = (1 + std::sqrt(5)) / 2.0;
 
 #ifdef ARRAY_QUEUE_DEBUG
 #include <cstdio>
@@ -19,11 +20,9 @@ protected:
     T* m_data = nullptr;
     size_t m_write_index = 0;
     size_t m_size = 0;
-    const double m_growth_factor;
 
 public:
-    ArrayQueue(double growth_factor = (1 + std::sqrt(5)) / 2.0)
-        : m_growth_factor(growth_factor) { }
+    ArrayQueue() { }
     ~ArrayQueue() {
         std::free(static_cast<void*>(m_data));
     }
@@ -36,7 +35,7 @@ public:
         }
         if (m_write_index >= m_size) {
             // we're at the end, resize
-            m_size = std::ceil(static_cast<double>(m_size) * m_growth_factor);
+            m_size = std::ceil(static_cast<double>(m_size) * GROWTH_FACTOR);
             T* new_data = static_cast<T*>(std::realloc(static_cast<void*>(m_data), m_size * sizeof(T)));
             if (!new_data) {
                 throw std::runtime_error("failed to realloc (OOM)");
