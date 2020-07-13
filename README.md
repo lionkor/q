@@ -31,4 +31,8 @@ index:           ^
 
 ## LinkedListQueue
 
-Just uses a linked list.
+Just uses a linked list, slowest variant of all the implementations. Creates a new node and appends it to the front on enqueue, dequeues from the back.
+
+## RingBufferQueue
+
+Non-resizable queue based on a ring buffer, really fast but really memory hungry as the size needs to be known and allocated at the star as the size needs to be known and allocated at the start.
