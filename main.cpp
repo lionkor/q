@@ -35,4 +35,4 @@
     }
 
 QUEUE_TEST(ArrayQueue)
-//QUEUE_TEST(LinkedListQueue)
+QUEUE_TEST(LinkedListQueue)

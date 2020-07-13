@@ -5,7 +5,6 @@
 #include <utility>
 #include <stdexcept>
 
-#define ARRAY_QUEUE_DEBUG
 #ifdef ARRAY_QUEUE_DEBUG
 #include <cstdio>
 #endif // ARRAY_QUEUE_DEBUG)
@@ -20,6 +19,9 @@ protected:
 
 public:
     ArrayQueue() { }
+    ~ArrayQueue() {
+        delete[] m_data;
+    }
 
     virtual void enqueue(T&& value) override {
         if (!m_data) {
