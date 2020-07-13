@@ -11,7 +11,7 @@ class LinkedListQueue : public Queue<T>
 protected:
     struct Node {
         T value;
-        Node* next;
+        Node* next = nullptr;
     };
 
     Node* m_next = nullptr;

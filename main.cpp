@@ -4,6 +4,7 @@
 #include "ArrayQueue.h"
 #include "LinkedListQueue.h"
 #include "RingBufferQueue.h"
+#include "DoublyLinkedListQueue.h"
 
 #define QUEUE_TEST(classname)                \
     TEST_CASE(#classname) {                  \
@@ -44,6 +45,7 @@
 
 QUEUE_TEST(ArrayQueue)
 QUEUE_TEST(LinkedListQueue)
+QUEUE_TEST(DoublyLinkedListQueue)
 
 TEST_CASE("RingBufferQueue") {
     RingBufferQueue<int, 10> q;
