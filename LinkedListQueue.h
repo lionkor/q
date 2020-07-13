@@ -38,14 +38,32 @@ public:
         if (!m_next) {
             throw std::runtime_error("dequeue from empty queue");
         }
+        Node* prev = nullptr;
+        Node* iter = m_next;
+        while (iter->next != nullptr) {
+            prev = iter;
+            iter = iter->next;
+        }
+        if (prev) {
+            prev->next = nullptr;
+        } else {
+            m_next = nullptr;
+        }
+        T value = std::move(iter->value);
+        delete iter;
         --m_size;
+        return value;
     }
 
     virtual const T& peek() const override {
         if (!m_next) {
             throw std::runtime_error("peek into empty queue");
         }
-        return m_next->value;
+        Node* iter = m_next;
+        while (iter->next != nullptr) {
+            iter = iter->next;
+        }
+        return iter->value;
     }
 
     virtual size_t size() const override {
