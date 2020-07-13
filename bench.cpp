@@ -1,0 +1,66 @@
+#include <benchmark/benchmark.h>
+
+#include "ArrayQueue.h"
+#include "LinkedListQueue.h"
+
+static void BM_ArrayQueue_enqueue_10(benchmark::State& state) {
+    ArrayQueue<size_t> q;
+    for (auto _ : state) {
+        for (size_t i = 0; i < 10; ++i) {
+            q.enqueue(std::move(i));
+        }
+    }
+}
+
+static void BM_LinkedListQueue_enqueue_10(benchmark::State& state) {
+    LinkedListQueue<size_t> q;
+    for (auto _ : state) {
+        for (size_t i = 0; i < 10; ++i) {
+            q.enqueue(std::move(i));
+        }
+    }
+}
+
+static void BM_ArrayQueue_enqueue_100(benchmark::State& state) {
+    ArrayQueue<size_t> q;
+    for (auto _ : state) {
+        for (size_t i = 0; i < 100; ++i) {
+            q.enqueue(std::move(i));
+        }
+    }
+}
+
+static void BM_LinkedListQueue_enqueue_100(benchmark::State& state) {
+    LinkedListQueue<size_t> q;
+    for (auto _ : state) {
+        for (size_t i = 0; i < 100; ++i) {
+            q.enqueue(std::move(i));
+        }
+    }
+}
+
+static void BM_ArrayQueue_enqueue_100000(benchmark::State& state) {
+    ArrayQueue<size_t> q;
+    for (auto _ : state) {
+        for (size_t i = 0; i < 100000; ++i) {
+            q.enqueue(std::move(i));
+        }
+    }
+}
+
+static void BM_LinkedListQueue_enqueue_100000(benchmark::State& state) {
+    LinkedListQueue<size_t> q;
+    for (auto _ : state) {
+        for (size_t i = 0; i < 100000; ++i) {
+            q.enqueue(std::move(i));
+        }
+    }
+}
+
+BENCHMARK(BM_ArrayQueue_enqueue_10);
+BENCHMARK(BM_LinkedListQueue_enqueue_10);
+BENCHMARK(BM_ArrayQueue_enqueue_100);
+BENCHMARK(BM_LinkedListQueue_enqueue_100);
+BENCHMARK(BM_ArrayQueue_enqueue_100000);
+BENCHMARK(BM_LinkedListQueue_enqueue_100000);
+BENCHMARK_MAIN();
