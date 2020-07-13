@@ -3,6 +3,48 @@
 #include "ArrayQueue.h"
 #include "LinkedListQueue.h"
 
+static void BM_ArrayQueue_dequeue_1(benchmark::State& state) {
+    ArrayQueue<size_t> q;
+    for (size_t i = 0; i < 100; ++i) {
+        q.enqueue(std::move(i));
+    }
+    for (auto _ : state) {
+        q.enqueue(60);
+        (void)q.dequeue();
+    }
+}
+
+static void BM_LinkedListQueue_dequeue_1(benchmark::State& state) {
+    LinkedListQueue<size_t> q;
+    for (size_t i = 0; i < 100; ++i) {
+        q.enqueue(std::move(i));
+    }
+    for (auto _ : state) {
+        q.enqueue(60);
+        (void)q.dequeue();
+    }
+}
+
+static void BM_ArrayQueue_peek(benchmark::State& state) {
+    ArrayQueue<size_t> q;
+    for (size_t i = 0; i < 100; ++i) {
+        q.enqueue(std::move(i));
+    }
+    for (auto _ : state) {
+        std::to_string(q.peek());
+    }
+}
+
+static void BM_LinkedListQueue_peek(benchmark::State& state) {
+    LinkedListQueue<size_t> q;
+    for (size_t i = 0; i < 100; ++i) {
+        q.enqueue(std::move(i));
+    }
+    for (auto _ : state) {
+        std::to_string(q.peek());
+    }
+}
+
 static void BM_ArrayQueue_enqueue_10(benchmark::State& state) {
     ArrayQueue<size_t> q;
     for (auto _ : state) {
@@ -20,6 +62,7 @@ static void BM_LinkedListQueue_enqueue_10(benchmark::State& state) {
         }
     }
 }
+
 
 static void BM_ArrayQueue_enqueue_100(benchmark::State& state) {
     ArrayQueue<size_t> q;
@@ -56,6 +99,13 @@ static void BM_LinkedListQueue_enqueue_100000(benchmark::State& state) {
         }
     }
 }
+
+
+BENCHMARK(BM_ArrayQueue_dequeue_1);
+BENCHMARK(BM_LinkedListQueue_dequeue_1);
+
+BENCHMARK(BM_ArrayQueue_peek);
+BENCHMARK(BM_LinkedListQueue_peek);
 
 BENCHMARK(BM_ArrayQueue_enqueue_10);
 BENCHMARK(BM_LinkedListQueue_enqueue_10);

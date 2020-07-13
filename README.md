@@ -29,3 +29,6 @@ array: [ 5 7 2 1 ]
 index:           ^
 ```
 
+## LinkedListQueue
+
+Just uses a linked list.
