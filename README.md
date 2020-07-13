@@ -2,6 +2,11 @@
 
 A few C++ queue implementations. I'm writing these as a little exercise for myself, that's all. 
 
+## Files
+
+- `main.cpp` - doctest tests for all queues
+- `bench.cpp` - google/benchmark ballpark benchmarks for all queues
+
 ## ArrayQueue
 
 An array is used to store all the values of the queue. For this, an index keeps track of the index of the next free space.
