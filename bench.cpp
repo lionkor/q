@@ -10,8 +10,8 @@ static void BM_ArrayQueue_dequeue_1(benchmark::State& state) {
         q.enqueue(std::move(i));
     }
     for (auto _ : state) {
-        q.enqueue(60);
         (void)q.dequeue();
+        q.enqueue(60);
     }
 }
 
@@ -21,8 +21,8 @@ static void BM_LinkedListQueue_dequeue_1(benchmark::State& state) {
         q.enqueue(std::move(i));
     }
     for (auto _ : state) {
-        q.enqueue(60);
         (void)q.dequeue();
+        q.enqueue(60);
     }
 }
 
@@ -32,8 +32,8 @@ static void BM_RingBufferQueue_dequeue_1(benchmark::State& state) {
         q.enqueue(std::move(i));
     }
     for (auto _ : state) {
-        q.enqueue(60);
         (void)q.dequeue();
+        q.enqueue(60);
     }
 }
 
@@ -68,8 +68,8 @@ static void BM_RingBufferQueue_peek(benchmark::State& state) {
 }
 
 static void BM_ArrayQueue_enqueue_10(benchmark::State& state) {
-    ArrayQueue<size_t> q;
     for (auto _ : state) {
+        ArrayQueue<size_t> q;
         for (size_t i = 0; i < 10; ++i) {
             q.enqueue(std::move(i));
         }
@@ -77,8 +77,8 @@ static void BM_ArrayQueue_enqueue_10(benchmark::State& state) {
 }
 
 static void BM_LinkedListQueue_enqueue_10(benchmark::State& state) {
-    LinkedListQueue<size_t> q;
     for (auto _ : state) {
+        LinkedListQueue<size_t> q;
         for (size_t i = 0; i < 10; ++i) {
             q.enqueue(std::move(i));
         }
@@ -86,8 +86,8 @@ static void BM_LinkedListQueue_enqueue_10(benchmark::State& state) {
 }
 
 static void BM_RingBufferQueue_enqueue_10(benchmark::State& state) {
-    RingBufferQueue<size_t, 10> q;
     for (auto _ : state) {
+        RingBufferQueue<size_t, 10> q;
         for (size_t i = 0; i < 10; ++i) {
             q.enqueue(std::move(i));
         }
@@ -95,8 +95,8 @@ static void BM_RingBufferQueue_enqueue_10(benchmark::State& state) {
 }
 
 static void BM_ArrayQueue_enqueue_100(benchmark::State& state) {
-    ArrayQueue<size_t> q;
     for (auto _ : state) {
+        ArrayQueue<size_t> q;
         for (size_t i = 0; i < 100; ++i) {
             q.enqueue(std::move(i));
         }
@@ -104,8 +104,8 @@ static void BM_ArrayQueue_enqueue_100(benchmark::State& state) {
 }
 
 static void BM_LinkedListQueue_enqueue_100(benchmark::State& state) {
-    LinkedListQueue<size_t> q;
     for (auto _ : state) {
+        LinkedListQueue<size_t> q;
         for (size_t i = 0; i < 100; ++i) {
             q.enqueue(std::move(i));
         }
@@ -113,8 +113,8 @@ static void BM_LinkedListQueue_enqueue_100(benchmark::State& state) {
 }
 
 static void BM_RingBufferQueue_enqueue_100(benchmark::State& state) {
-    RingBufferQueue<size_t, 100> q;
     for (auto _ : state) {
+        RingBufferQueue<size_t, 100> q;
         for (size_t i = 0; i < 100; ++i) {
             q.enqueue(std::move(i));
         }
@@ -122,8 +122,8 @@ static void BM_RingBufferQueue_enqueue_100(benchmark::State& state) {
 }
 
 static void BM_ArrayQueue_enqueue_100000(benchmark::State& state) {
-    ArrayQueue<size_t> q;
     for (auto _ : state) {
+        ArrayQueue<size_t> q;
         for (size_t i = 0; i < 100000; ++i) {
             q.enqueue(std::move(i));
         }
@@ -131,8 +131,8 @@ static void BM_ArrayQueue_enqueue_100000(benchmark::State& state) {
 }
 
 static void BM_LinkedListQueue_enqueue_100000(benchmark::State& state) {
-    LinkedListQueue<size_t> q;
     for (auto _ : state) {
+        LinkedListQueue<size_t> q;
         for (size_t i = 0; i < 100000; ++i) {
             q.enqueue(std::move(i));
         }
@@ -140,8 +140,8 @@ static void BM_LinkedListQueue_enqueue_100000(benchmark::State& state) {
 }
 
 static void BM_RingBufferQueue_enqueue_100000(benchmark::State& state) {
-    RingBufferQueue<size_t, 100000> q;
     for (auto _ : state) {
+        RingBufferQueue<size_t, 100000> q;
         for (size_t i = 0; i < 100000; ++i) {
             q.enqueue(std::move(i));
         }

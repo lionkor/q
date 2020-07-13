@@ -64,6 +64,12 @@ public:
     }
 
     virtual size_t size() const override { return m_enqueued_count; }
+    
+    virtual void clear() override {
+        m_write_ptr = m_data;
+        m_read_ptr = m_data;
+        m_enqueued_count = 0;
+    }
 };
 
 #endif // RINGBUFFERQUEUE_H

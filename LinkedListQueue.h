@@ -17,15 +17,19 @@ protected:
     Node* m_next = nullptr;
     size_t m_size = 0;
 
-public:
-    LinkedListQueue() { }
-    
-    ~LinkedListQueue() {
+    void delete_all() {
         while (m_next != nullptr) {
             auto to_delete = m_next;
             m_next = m_next->next;
             delete to_delete;
         }
+    }
+    
+public:
+    LinkedListQueue() { }
+    
+    ~LinkedListQueue() {
+        delete_all();
     }
 
     virtual void enqueue(T&& value) override {
@@ -68,6 +72,12 @@ public:
 
     virtual size_t size() const override {
         return m_size;
+    }
+    
+    virtual void clear() override {
+        delete_all();
+        m_next = nullptr;
+        m_size = 0;
     }
 };
 

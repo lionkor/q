@@ -44,9 +44,9 @@ public:
         m_data[m_write_index] = value;
         m_write_index += 1;
     }
-    
+
     [[nodiscard]] virtual T dequeue() override {
-        if (m_write_index == 0)  {
+        if (m_write_index == 0) {
             // nothing in the queue
             throw std::runtime_error("tried to dequeue from empty queue");
         }
@@ -60,23 +60,30 @@ public:
         m_write_index -= 1;
         return value;
     }
-    
+
     virtual const T& peek() const override {
 #ifdef ARRAY_QUEUE_DEBUG
         std::printf("peek: data = %#x, index = %u, size = %u\n", m_data, m_write_index, m_size);
 #endif // ARRAY_QUEUE_DEBUG)
-        if (m_write_index == 0)  {
+        if (m_write_index == 0) {
             // nothing in the queue
             throw std::runtime_error("tried to peek into empty queue");
         }
         return m_data[0];
     }
-    
+
     virtual size_t size() const override {
 #ifdef ARRAY_QUEUE_DEBUG
         std::printf("size: data = %#x, index = %u, size = %u\n", m_data, m_write_index, m_size);
 #endif // ARRAY_QUEUE_DEBUG)
         return m_write_index;
+    }
+
+    virtual void clear() override {
+        delete[] m_data;
+        m_data = nullptr;
+        m_size = 0;
+        m_write_index = 0;
     }
 };
 

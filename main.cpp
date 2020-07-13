@@ -33,6 +33,13 @@
             }                                \
             CHECK_THROWS(q.peek());          \
         }                                    \
+                                             \
+        SUBCASE("clear") {                   \
+            q.clear();                       \
+            CHECK(q.size() == 0);            \
+            CHECK_THROWS((void)q.dequeue()); \
+            CHECK_THROWS((void)q.peek());    \
+        }                                    \
     }
 
 QUEUE_TEST(ArrayQueue)
@@ -66,5 +73,12 @@ TEST_CASE("RingBufferQueue") {
         CHECK(q.dequeue() == 9);
         CHECK(q.size() == 0);
         CHECK_THROWS((void)q.dequeue());
+    }
+    
+    SUBCASE("clear") {
+        q.clear();
+        CHECK(q.size() == 0);
+        CHECK_THROWS((void)q.dequeue());
+        CHECK_THROWS((void)q.peek());
     }
 }
