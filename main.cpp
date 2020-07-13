@@ -2,10 +2,11 @@
 #include "doctest.h"
 
 #include "ArrayQueue.h"
+#include "LinkedListQueue.h"
 
 #define QUEUE_TEST(classname)                \
-    TEST_CASE(#classname) {                \
-        classname<int> q;                   \
+    TEST_CASE(#classname) {                  \
+        classname<int> q;                    \
         CHECK(q.size() == 0);                \
         for (int i = 0; i < 10; ++i) {       \
             q.enqueue(std::move(i));         \
@@ -14,18 +15,18 @@
                                              \
         SUBCASE("dequeue") {                 \
             for (int i = 0; i < 9; ++i) {    \
-                CHECK(9 - i == q.dequeue()); \
+                CHECK(i == q.dequeue());     \
             }                                \
             CHECK(q.size() == 1);            \
-            CHECK(q.dequeue() == 0);         \
+            CHECK(q.dequeue() == 9);         \
             CHECK(q.size() == 0);            \
             CHECK_THROWS((void)q.dequeue()); \
         }                                    \
                                              \
         SUBCASE("peek") {                    \
-            CHECK(q.peek() == 9);            \
+            CHECK(q.peek() == 0);            \
             (void)q.dequeue();               \
-            CHECK(q.peek() == 8);            \
+            CHECK(q.peek() == 1);            \
             while (q.size() != 0) {          \
                 (void)q.dequeue();           \
             }                                \
@@ -34,3 +35,4 @@
     }
 
 QUEUE_TEST(ArrayQueue)
+//QUEUE_TEST(LinkedListQueue)
